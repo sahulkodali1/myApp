@@ -1,15 +1,22 @@
 package com.myApp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cous=rsedetails")
+@Table(name = "cous=rsedetails")
 public class Coursedetails implements Serializable {
 
 	/**
@@ -18,12 +25,20 @@ public class Coursedetails implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-private int courseid;
+	private int courseid;
 	private String coursename;
 	private String prerequisites;
 	private String author;
 	private String description;
+	@Enumerated(EnumType.STRING)
 	private Skilllevel level;
+
+	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+
+	@JoinTable(name = "courseuser", joinColumns = @JoinColumn(name = "courseId", referencedColumnName = "userName"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+
+	private List<Userdetails> users;
+
 	public Coursedetails(int courseid, String coursename, String prerequisites, String author, String description,
 			Skilllevel level) {
 		super();
@@ -34,42 +49,55 @@ private int courseid;
 		this.description = description;
 		this.level = level;
 	}
+
 	public int getCourseid() {
 		return courseid;
 	}
+
 	public void setCourseid(int courseid) {
 		this.courseid = courseid;
 	}
+
 	public String getCoursename() {
 		return coursename;
 	}
+
 	public void setCoursename(String coursename) {
 		this.coursename = coursename;
 	}
+
 	public String getPrerequisites() {
 		return prerequisites;
 	}
+
 	public void setPrerequisites(String prerequisites) {
 		this.prerequisites = prerequisites;
 	}
+
 	public String getAuthor() {
 		return author;
 	}
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Skilllevel getLevel() {
 		return level;
 	}
+
 	public void setLevel(Skilllevel level) {
 		this.level = level;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,6 +105,7 @@ private int courseid;
 		result = prime * result + courseid;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -90,6 +119,7 @@ private int courseid;
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Coursedetails [courseid=" + courseid + "]";
