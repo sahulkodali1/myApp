@@ -27,7 +27,7 @@ public class Userdetails implements Serializable {
 	private String company;
 
 	@ManyToMany(mappedBy = "users")
-	private List<Coursedetails> cdetails;
+	private List<Coursedetails> courses;
 
 	public Userdetails(String username, String password, LocalDateTime createtime, LocalDateTime updatetime,
 			String firstname, String middlename, String lastname, String company) {
