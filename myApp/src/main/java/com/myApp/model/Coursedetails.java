@@ -1,6 +1,7 @@
 package com.myApp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,11 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "cous=rsedetails")
 public class Coursedetails implements Serializable {
+
+	
 
 	/**
 	 * 
@@ -35,9 +39,12 @@ public class Coursedetails implements Serializable {
 
 	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 
-	@JoinTable(name = "courseuser", joinColumns = @JoinColumn(name = "courseId", referencedColumnName = "userName"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+	@JoinTable(name = "courseuser", joinColumns = @JoinColumn(name = "courseId", referencedColumnName = "courseid"), inverseJoinColumns = @JoinColumn(name = "userName", referencedColumnName = "username"))
 
-	private List<Userdetails> users;
+	private List<Userdetails> users = new ArrayList<>();
+
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+	private List<Coursetopics> topics = new ArrayList<>();
 
 	public Coursedetails(int courseid, String coursename, String prerequisites, String author, String description,
 			Skilllevel level) {
@@ -96,6 +103,21 @@ public class Coursedetails implements Serializable {
 
 	public void setLevel(Skilllevel level) {
 		this.level = level;
+	}
+	public List<Userdetails> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<Userdetails> users) {
+		this.users = users;
+	}
+
+	public List<Coursetopics> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(List<Coursetopics> topics) {
+		this.topics = topics;
 	}
 
 	@Override
