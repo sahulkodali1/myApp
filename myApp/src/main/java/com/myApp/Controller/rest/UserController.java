@@ -1,7 +1,6 @@
 package com.myApp.Controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +13,7 @@ import com.myApp.model.Userdetails;
 @RestController
 @RequestMapping("user")
 public class UserController {
+	
 	@Autowired
 	private UserRepo userRepo;
 	
