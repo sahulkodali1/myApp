@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myApp.Model.Coursedetails;
+import com.myApp.Model.Userdetails;
 import com.myApp.Repositories.CourseRepo;
 import com.myApp.Repositories.UserRepo;
-import com.myApp.model.Coursedetails;
-import com.myApp.model.Userdetails;
 
 @RestController
 @RequestMapping("course")

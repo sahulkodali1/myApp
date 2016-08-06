@@ -5,4 +5,4 @@
  * @author SAHUL
  *
  */
-package com.myApp.model;
+package com.myApp.Model;
